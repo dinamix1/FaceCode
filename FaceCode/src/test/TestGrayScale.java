@@ -11,8 +11,7 @@ import javax.imageio.ImageIO;
 
 public class TestGrayScale {
 	public static void main(String[] args) throws IOException {
-		File image = new File("Pictures//training_dataset//1_10_.gif");
-
+		File image = new File("Pictures//spacey.png");
 		BufferedImage buffimage = ImageIO.read(image);
 
 		int[] originalFaceVector = new int[buffimage.getWidth() * buffimage.getHeight()];
@@ -21,16 +20,21 @@ public class TestGrayScale {
 		int originalFaceVectorTracking = 0;
 		
 		//Converts RGB to grayscale and inputs it into originlaFaceVector
-        for (int x = 0; x < buffimage.getWidth(); x++) {
-            for (int y = 0; y < buffimage.getHeight(); y++) {
+        for (int y = 0; y < buffimage.getHeight(); y++) {
+            for (int x = 0; x < buffimage.getWidth(); x++) {
                 Color color = new Color(buffimage.getRGB(x, y));
                 
                 //Averages out RGB to get an average algorithm grayscale value
                 int grayscale = (color.getRed() + color.getGreen() + color.getBlue())/3;
 
                 originalFaceVector[originalFaceVectorTracking++] = grayscale;
+                
+                //force picture into grayscale
+                buffimage.setRGB(x,y,new Color(grayscale,grayscale,grayscale).getRGB());
             }
         }
+        
+        ImageIO.write(buffimage, "png", new File("Pictures//grayspacey.png"));
         
 		for(int i = 0; i < originalFaceVector.length; i++) {
 			System.out.println(originalFaceVector[i]);
