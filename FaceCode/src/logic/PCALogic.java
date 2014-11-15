@@ -40,7 +40,7 @@ public class PCALogic {
 		}
 	}
 	
-	private int [] subtractVectors(int [] v1, int [] v2){
+	protected int [] subtractVectors(int [] v1, int [] v2){
 		int [] difference = new int[v1.length];
 		
 		for(int i = 0; i < difference.length; i++){

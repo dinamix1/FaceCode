@@ -1,4 +1,4 @@
-package test;
+package utils;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 import org.imgscalr.Scalr;
 
-public class ImageScale {
+public class TestImageScale {
 	public static void main(String[] args) {
 		File image = new File("spacey.png");
 		File resizeImage = new File("respace.png");
@@ -25,6 +25,5 @@ public class ImageScale {
 		catch (Exception e) {
 			System.out.println("In catch black " + e.getMessage());
 		}
-
 	}
 }
