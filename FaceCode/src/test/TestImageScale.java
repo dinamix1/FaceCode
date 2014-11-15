@@ -25,6 +25,5 @@ public class TestImageScale {
 		catch (Exception e) {
 			System.out.println("In catch black " + e.getMessage());
 		}
-
 	}
 }
