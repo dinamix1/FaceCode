@@ -61,7 +61,14 @@ public class PCALogic {
 	//Return a matrix of eigenvectors (columns)
 	public Matrix computeEigenVectors(Matrix covariance){ 
 		EigenvalueDecomposition eigenVectors = new EigenvalueDecomposition(covariance);
-		return eigenVectors.getV();
+		Matrix eigenVectorsMatrix = eigenVectors.getV();
+		double[][] eig = eigenVectorsMatrix.getArray();
+		for (int i=0;i<3;i++){
+			for (int j=0;j<3;j++){
+				eig[i][j] = eig[i][j]/eig[3][j]; //normalize the array
+			}
+		}
+		return new Matrix(eig);
 	}
 	//Return a matrix of eigenfaces (columns)
 	public Matrix computeEigenFaces(Matrix aMatrix,Matrix eigenVectorsMatrix){
