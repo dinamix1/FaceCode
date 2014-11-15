@@ -1,7 +1,6 @@
 package data;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -23,6 +22,7 @@ public class HDDDao {
 		FileInputStream fis = new FileInputStream(FILE_NAME);
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		ArrayList<Face> faceList = (ArrayList<Face>) ois.readObject();
+		ois.close();
 		return faceList;
 		
 	}

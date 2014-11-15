@@ -10,8 +10,9 @@ public class Face implements Serializable{
 	private BufferedImage originalFace;
 	private int originalImageHeight;
 	private int originalImageWidth;
-	private int [][] originalFaceVector;
+	private int [] originalFaceVector;
 	private int [][] eigenFace;
+	private int [] faceDifference;
 	
 	public Face(String faceName, BufferedImage originalFace){
 		this.faceName = faceName;
@@ -20,16 +21,16 @@ public class Face implements Serializable{
 		originalImageWidth = originalFace.getWidth();
 	}
 	
-	public void setEigenFace(int [][] eigenFace){
-		this.eigenFace = eigenFace;
+	public void setFaceDifference(int [] faceDifference){
+		this.faceDifference = faceDifference;
 	}
 	
-	public int [][] getEigenFace(){
-		return eigenFace;
+	public int [] getFaceDifference(){
+		return faceDifference;
 	}
 	
-	public int [][] getOriginalFace(){
-		return eigenFace;
+	public BufferedImage getOriginalFace(){
+		return originalFace;
 	}
 	
 	public int [] getOriginalFaceVector(){
