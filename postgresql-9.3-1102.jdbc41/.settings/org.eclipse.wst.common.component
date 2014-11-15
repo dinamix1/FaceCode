@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="postgresql-9.3-1102.jdbc41">
-        <wb-resource deploy-path="/" source-path="/appClientModule" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/" source-path="/ImportedClasses"/>
-        <property name="java-output-path" value="/postgresql-9.3-1102.jdbc41/build/classes"/>
-    </wb-module>
-</project-modules>
