@@ -26,4 +26,15 @@ public class LinearAlgebraUtils {
 		
 		return matrix;
 	}
+	
+	public static double [] getColumnVector(Matrix matrix, int columnIndex){
+		int rowDimension = matrix.getRowDimension();
+		double [] columnVector = new double[rowDimension];
+		for(int i = 0; i < rowDimension; i++){
+			double value =  matrix.get(i,columnIndex);
+			columnVector[i] = value;
+		}
+		
+		return columnVector;
+	}
 }

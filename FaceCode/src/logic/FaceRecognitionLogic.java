@@ -7,14 +7,14 @@ public class FaceRecognitionLogic {
 	
 	private PCALogic pcaLogic;
 	private FaceDataLogic dataLogic;
-	private static final int DISTANCE_THRESHOLD = 10;
+	private static final double DISTANCE_THRESHOLD = 10;
 	
 	public boolean isFaceInList(Face faceToFind, ArrayList<Face> faceList){
 		Face bestMatch = null;
-		int bestMatchDistance = -1;
+		double bestMatchDistance = -1;
 		
 		for(Face face : faceList){
-			int distance = faceToFind.computeDistance(face);
+			double distance = faceToFind.computeDistance(face);
 			if(distance > bestMatchDistance){
 				continue;
 			}

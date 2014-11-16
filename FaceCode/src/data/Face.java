@@ -11,10 +11,19 @@ public class Face implements Serializable{
 	private BufferedImage originalFace;
 	private int [][] eigenFace;
 	private int [] faceDifference;
+	private double [] weightVector;
 	
 	public Face(String faceName, BufferedImage originalFace){
 		this.faceName = faceName;
 		this.originalFace = originalFace;
+	}
+	
+	public void setWeightVector(double [] weights){
+		weightVector = weights;
+	}
+	
+	public double [] getWeightVector(){
+		return weightVector;
 	}
 	
 	public void setFaceDifference(int [] faceDifference){
@@ -50,7 +59,23 @@ public class Face implements Serializable{
 		return originalFaceVector;
 	}
 	
-	public int computeDistance(Face face){
-		return -1;
+	public double computeDistance(Face face){
+		if(this.weightVector.length != face.weightVector.length){
+			return -1;
+		}
+		
+		double [] newFaceWeights = face.getWeightVector();
+		double [] thisFaceWeights = this.getWeightVector();
+		
+		double total = 0;
+		
+		for(int i = 0; i < newFaceWeights.length; i++){
+			double diff = newFaceWeights[i] - thisFaceWeights[i];
+			total = total + Math.pow(diff, 2);
+		}
+		
+		double result = Math.sqrt(total);
+		return result;
+		
 	}
 }

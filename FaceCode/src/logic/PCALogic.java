@@ -88,5 +88,10 @@ public class PCALogic {
 		Matrix eigenvectors = computeEigenVectors(covariance);
 		Matrix eigenfaces = computeEigenFaces(diffMatrix,eigenvectors);
 		Matrix weightsMatrix = weights(eigenfaces,diffMatrix);
+		
+		for(int i = 0; i < faceList.size(); i++){
+			double [] weightVector = LinearAlgebraUtils.getColumnVector(weightsMatrix, i);
+			faceList.get(i).setWeightVector(weightVector);
+		}
 	}
 }
