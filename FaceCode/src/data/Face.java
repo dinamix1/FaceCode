@@ -33,17 +33,18 @@ public class Face implements Serializable{
 		int[] originalFaceVector = new int[originalFace.getWidth() * originalFace.getHeight()];
 		
 		//Used to keep track of where we are in 1D face vector array
-		int originalFaceVectorTracking = 0;
+		int index = 0;
 		
 		//Converts RGB to grayscale and inputs it into originlaFaceVector
-        for (int x = 0; x < originalFace.getWidth(); x++) {
-            for (int y = 0; y < originalFace.getHeight(); y++) {
+        for (int y = 0; y < originalFace.getHeight(); y++) {
+            for (int x = 0; x < originalFace.getWidth(); x++) {
                 Color color = new Color(originalFace.getRGB(x, y));
                 
                 //Averages out RGB to get an average algorithm grayscale value
                 int grayscale = (color.getRed() + color.getGreen() + color.getBlue())/3;
 
-                originalFaceVector[originalFaceVectorTracking++] = grayscale;
+                originalFaceVector[index] = grayscale;
+                index++;
             }
         }
 		return originalFaceVector;
