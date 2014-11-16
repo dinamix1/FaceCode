@@ -22,6 +22,7 @@ public class testFaceDetector {
         //File output = new File("Pictures//training_dataset_png//1_10_.png");
 
         //ImageIO.write( ImageIO.read( input ), "png", output);
+
         
         CascadeClassifier testFaceDetector = new CascadeClassifier("C:\\Users\\Tristano\\Documents\\Code_Jam\\opencv\\sources\\data\\haarcascades\\haarcascade_mcs_eyepair_big.xml");
         Mat image = Highgui.imread("Pictures//womenclosed.jpg");
