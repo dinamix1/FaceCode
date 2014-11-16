@@ -7,23 +7,23 @@ public class Face implements Serializable{
 	private static final long serialVersionUID = 3594111941132367353L;
 	private String faceName;
 	private int [][] originalFace;
-	private int [][] eigenFace;
+	private int [] faceDifference;
 	
 	public Face(String faceName, int [][] originalFace){
 		this.faceName = faceName;
 		this.originalFace = originalFace;
 	}
 	
-	public void setEigenFace(int [][] eigenFace){
-		this.eigenFace = eigenFace;
+	public void setFaceDifference(int [] faceDifference){
+		this.faceDifference = faceDifference;
 	}
 	
-	public int [][] getEigenFace(){
-		return eigenFace;
+	public int [] getFaceDifference(){
+		return faceDifference;
 	}
 	
 	public int [][] getOriginalFace(){
-		return eigenFace;
+		return originalFace;
 	}
 	
 	public int [] getOriginalFaceVector(){
