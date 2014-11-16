@@ -9,7 +9,7 @@ public class FaceRecognitionLogic {
 	private FaceDataLogic dataLogic;
 	private static final double DISTANCE_THRESHOLD = 10;
 	
-	public boolean isFaceInList(Face faceToFind, ArrayList<Face> faceList){
+	public Face getBestMatch(Face faceToFind, ArrayList<Face> faceList){
 		Face bestMatch = null;
 		double bestMatchDistance = -1;
 		
@@ -24,10 +24,10 @@ public class FaceRecognitionLogic {
 		}
 		
 		if(bestMatchDistance < DISTANCE_THRESHOLD && bestMatchDistance >= 0){
-			return true;
+			return bestMatch;
 		}
 		else{
-			return false;
+			return null;
 		}
 	}
 	
@@ -40,9 +40,13 @@ public class FaceRecognitionLogic {
 		faceToMatch.setFaceDifference(differenceVector);
 		
 		pcaLogic.runPCA(faceList, faceToMatch);
-		
-		
-		return null;
+		Face bestMatch = getBestMatch(faceToMatch, faceList);
+		if(bestMatch != null){
+			return bestMatch.getFaceName();
+		}
+		else{
+			return null;
+		}
 	}
 	
 }

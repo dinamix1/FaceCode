@@ -93,5 +93,17 @@ public class PCALogic {
 			double [] weightVector = LinearAlgebraUtils.getColumnVector(weightsMatrix, i);
 			faceList.get(i).setWeightVector(weightVector);
 		}
+		
+		double [] diffVector = faceToMatch.getFaceDifferenceAsDoubles(); 
+		double [][] fakeMatrix = new double[diffVector.length][1];
+		
+		for(int i = 0; i < diffVector.length; i++){
+			fakeMatrix[i][0] = diffVector[i];
+		}
+		
+		Matrix diffNewFace = new Matrix(fakeMatrix);
+		Matrix newFaceWeight = weights(eigenfaces,diffNewFace);
+		double [] unknownWeights = LinearAlgebraUtils.getColumnVector(newFaceWeight, 0);
+		faceToMatch.setWeightVector(unknownWeights);
 	}
 }

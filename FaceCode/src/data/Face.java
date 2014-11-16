@@ -22,6 +22,10 @@ public class Face implements Serializable{
 		weightVector = weights;
 	}
 	
+	public String getFaceName(){
+		return faceName;
+	}
+	
 	public double [] getWeightVector(){
 		return weightVector;
 	}
@@ -32,6 +36,15 @@ public class Face implements Serializable{
 	
 	public int [] getFaceDifference(){
 		return faceDifference;
+	}
+	
+	public double [] getFaceDifferenceAsDoubles(){
+		double [] differences = new double[faceDifference.length];
+		for(int i = 0; i < faceDifference.length; i++){
+			differences[i] = (double) faceDifference[i];
+		}
+		
+		return differences;
 	}
 	
 	public BufferedImage getOriginalFace(){
