@@ -17,6 +17,7 @@ public class Main {
 	private static FaceDataLogic dataLogic;
 	
 	public static void main(String [] args){
+		long startTime = System.currentTimeMillis();
 		
 		logic = new FaceRecognitionLogic();
 		dataLogic = new FaceDataLogic();
@@ -42,6 +43,12 @@ public class Main {
 		else{
 			System.out.println("Match found: " + faceMatch);
 		}
+		
+		long endTime = System.currentTimeMillis();
+		
+		long totalTime = endTime - startTime;
+		totalTime = totalTime/1000;
+		System.out.println("This took: " + totalTime + " seconds to run");
 
 	}
 

@@ -17,6 +17,7 @@ public class HDDDao {
 	private static final String FILE_NAME = "faces.ser";
 	
 	public void writeFaces(ArrayList<Face> faceList) throws IOException{
+		System.out.println("Computing faces to disk");
 		FileOutputStream fos = new FileOutputStream(FILE_NAME);
 		ObjectOutputStream oos = new ObjectOutputStream(fos);
 		oos.writeObject(faceList);
@@ -24,6 +25,7 @@ public class HDDDao {
 	}
 	
 	public ArrayList<Face> readFaces() throws IOException, ClassNotFoundException{
+		System.out.println("Reading faces from disk");
 		ArrayList<Face> faceList;
 		
 		FileInputStream fis = new FileInputStream(FILE_NAME);

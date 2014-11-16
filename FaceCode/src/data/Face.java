@@ -19,6 +19,7 @@ public class Face implements Serializable{
 	transient private BufferedImage originalFace = null;
 	private int [] faceDifference;
 	private double [] weightVector;
+	transient private int [] originalFaceVector = null;
 	
 	public Face(String faceName){
 		this.faceName = faceName;
@@ -60,6 +61,7 @@ public class Face implements Serializable{
 		}
 		else{
 			try {
+				System.out.println("Loading image: " + faceName);
 				originalFace = ImageIO.read(new File(faceName));
 				if(originalFace == null){
 					System.out.println("File: " + faceName + " returned null image");
@@ -75,6 +77,10 @@ public class Face implements Serializable{
 	}
 	
 	public int [] getOriginalFaceVector(){
+		if(originalFaceVector != null){
+			return originalFaceVector;
+		}
+		
 		int[] originalFaceVector = new int[getOriginalFace().getWidth() * getOriginalFace().getHeight()];
 		
 		//Used to keep track of where we are in 1D face vector array
@@ -92,6 +98,8 @@ public class Face implements Serializable{
                 index++;
             }
         }
+        
+        this.originalFaceVector = originalFaceVector;
 		return originalFaceVector;
 	}
 	

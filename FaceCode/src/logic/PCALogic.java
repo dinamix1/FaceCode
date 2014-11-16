@@ -12,6 +12,7 @@ public class PCALogic {
 
 	
 	public int [] computeAverageFaceVector(ArrayList<Face> faceList){
+		System.out.println("Computing Average face");
 		
 		if(faceList.isEmpty()){
 			return null;
@@ -20,6 +21,7 @@ public class PCALogic {
 		int vectorSize = faceList.get(0).getOriginalFaceVector().length;
 		int noFaces = faceList.size();
 		int [] averageFaceVector = new int[vectorSize];
+		
 		
 		for(int i = 0; i < vectorSize; i++){
 			
@@ -37,6 +39,7 @@ public class PCALogic {
 	}
 	
 	public void computeAverageFaceDifferences(int [] averageFace, ArrayList<Face> faceList){
+		System.out.println("Computing differences");
 		for (Face face : faceList){
 			int [] originalFaceVector = face.getOriginalFaceVector();
 			int [] faceDifference = subtractVectors(originalFaceVector, averageFace);
@@ -55,11 +58,13 @@ public class PCALogic {
 	}
 	//Return covariance matrix AT * A
 	public Matrix computeCovariance(Matrix aMatrix){ 
+		System.out.println("Computing covariance");
 		Matrix aTranspose = aMatrix.transpose();
 		return aTranspose.times(aMatrix);
 	}
 	//Return a matrix of eigenvectors (columns)
 	public Matrix computeEigenVectors(Matrix covariance){ 
+		System.out.println("Computing EigenVectors");
 		EigenvalueDecomposition eigenVectors = new EigenvalueDecomposition(covariance);
 		Matrix eigenVectorsMatrix = eigenVectors.getV();
 		double[][] eig = eigenVectorsMatrix.getArray();
@@ -72,17 +77,20 @@ public class PCALogic {
 	}
 	//Return a matrix of eigenfaces (columns)
 	public Matrix computeEigenFaces(Matrix aMatrix,Matrix eigenVectorsMatrix){
+		System.out.println("Computing Eigenfaces");
 		Matrix eigenFaces = aMatrix.times(eigenVectorsMatrix);
 		return eigenFaces;
 	}
 	//Return a matrix of weights in columns
 	public Matrix weights(Matrix eigenFaces,Matrix aMatrix){ 
+		System.out.println("Computing weights");
 		Matrix eigenFacesTranspose = eigenFaces.transpose();
 		Matrix weightMatrix = eigenFacesTranspose.times(aMatrix);
 	    return weightMatrix;
 	}
 	
 	public void runPCA(ArrayList<Face> faceList, Face faceToMatch){
+		System.out.println("Running PCA");
 		Matrix diffMatrix = LinearAlgebraUtils.getFaceDifferencesAsMatrix(faceList);
 		Matrix covariance = computeCovariance(diffMatrix);
 		Matrix eigenvectors = computeEigenVectors(covariance);
