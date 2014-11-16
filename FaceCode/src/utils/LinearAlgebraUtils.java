@@ -12,7 +12,7 @@ public class LinearAlgebraUtils {
 		int faceDifferenceVectorSize = faceList.get(0).getFaceDifference().length; 
 		
 		//Each face difference vector is a column vector in the matrix
-		Matrix matrix = new Matrix(faceList.size(), faceDifferenceVectorSize);
+		Matrix matrix = new Matrix(faceDifferenceVectorSize, faceList.size());
 		
 		for(int i = 0;i < faceList.size(); i++){
 			
