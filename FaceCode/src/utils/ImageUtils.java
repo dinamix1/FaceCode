@@ -1,4 +1,4 @@
-package logic;
+package utils;
 
 import java.awt.image.BufferedImage;
 import org.imgscalr.Scalr; //imgscalr imported library but not native. built using base java libraries
@@ -8,7 +8,7 @@ import org.imgscalr.Scalr; //imgscalr imported library but not native. built usi
  * http://www.thebuzzmedia.com/downloads/software/imgscalr/javadoc/org/imgscalr/Scalr.html
  */
 
-public class ImageScalar {
+public class ImageUtils {
 	public static BufferedImage reSize(BufferedImage image,int width,int height) {
 		//return BufferedImage Object with specified height and width
 		//given from org.imgscalr.Scalr library
