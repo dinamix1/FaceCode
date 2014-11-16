@@ -26,6 +26,10 @@ public class Face implements Serializable{
 		return eigenFace;
 	}
 	
+	public int [] getOriginalFaceVector(){
+		return null;
+	}
+	
 	public int computeDistance(Face face){
 		return -1;
 	}
