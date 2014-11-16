@@ -11,7 +11,8 @@ import org.opencv.objdetect.CascadeClassifier;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
- 
+import java.awt.image.BufferedImage;
+
 public class testFaceDetector {
  
     public static void main(String[] args) throws IOException {
@@ -46,9 +47,10 @@ public class testFaceDetector {
         	double newYcenter = ycenter + rect.height;
         	double newXright = xbottomright + newwidth*0.25;
         	double newXleft = xtopleft - newwidth*0.25;
-        	double newYtop = newYcenter + newheight/2;
-        	double newYbottom = newYcenter - newheight/2;
+        	double newYtop = newYcenter - newheight/2;
+        	double newYbottom = newYcenter + newheight/2; 	
         	
+        	BufferedImage crop = getSubimage(newXleft,newYtop,newwidth,newheight);
         	
         	Point pointleft = new Point(xtopleft, ytopleft);
         	Point pointright = new Point(xbottomright, ybottomright);
