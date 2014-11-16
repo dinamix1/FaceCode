@@ -55,9 +55,18 @@ public class PCALogicTest {
 		assertEquals(averageFace[2],(3+4+1+4)/4);
 		assertEquals(averageFace[3],(4+5+5+1)/4);
 		assertEquals(averageFace[4],(5+6+6+10)/4);
+	}
+	
+	@Test
+	public void testSubtractVectors(){
+		int [] v1 = {12,3,2,4,1};
+		int [] v2 = {4,2,2,1,1};
 		
+		int[] result = testLogic.subtractVectors(v1, v2);
 		
-		
+		for(int i = 0; i < v1.length; i++){
+			assertEquals(result[i],v1[i] - v2[i]);
+		}
 	}
 	
 }
