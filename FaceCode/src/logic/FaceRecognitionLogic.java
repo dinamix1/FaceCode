@@ -9,6 +9,11 @@ public class FaceRecognitionLogic {
 	private FaceDataLogic dataLogic;
 	private static final double DISTANCE_THRESHOLD = 10;
 	
+	public FaceRecognitionLogic(){
+		pcaLogic = new PCALogic();
+		dataLogic = new FaceDataLogic();
+	}
+	
 	public Face getBestMatch(Face faceToFind, ArrayList<Face> faceList){
 		Face bestMatch = null;
 		double bestMatchDistance = -1;
@@ -24,6 +29,7 @@ public class FaceRecognitionLogic {
 		}
 		
 		if(bestMatchDistance < DISTANCE_THRESHOLD && bestMatchDistance >= 0){
+			System.out.println("Best match with distance: " + bestMatchDistance);
 			return bestMatch;
 		}
 		else{
@@ -33,7 +39,7 @@ public class FaceRecognitionLogic {
 	
 	public String getFaceMatch(String inputFilename){
 		ArrayList<Face> faceList = dataLogic.loadFaceDb();
-		Face faceToMatch = dataLogic.loadUnknownFace(inputFilename);
+		Face faceToMatch = new Face(inputFilename);
 		int [] averageFaceVector = pcaLogic.computeAverageFaceVector(faceList);
 		int [] originalFaceVector = faceToMatch.getOriginalFaceVector();
 		int [] differenceVector = pcaLogic.subtractVectors(originalFaceVector, averageFaceVector);

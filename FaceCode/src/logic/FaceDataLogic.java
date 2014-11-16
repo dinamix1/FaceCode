@@ -1,5 +1,6 @@
 package logic;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -10,8 +11,21 @@ import exception.FaceLoadException;
 public class FaceDataLogic {
 	private HDDDao dao;
 	
-	public void addFace(Face face){
-		//Use dao to get current faces
+	public FaceDataLogic(){
+		dao = new HDDDao();
+	}
+	
+	public void addFace(Face face) throws IOException, ClassNotFoundException{
+		ArrayList<Face> faceList = null;
+		if(dao.doesDBFileExist()){
+			faceList = dao.readFaces();
+		}
+		else{
+			faceList = new ArrayList<Face>();
+		}
+		
+		faceList.add(face);
+		dao.writeFaces(faceList);
 	}
 	
 	public ArrayList<Face> loadFaceDb() throws FaceLoadException{
@@ -24,7 +38,4 @@ public class FaceDataLogic {
 		}
 	}
 	
-	public Face loadUnknownFace(String fileName){
-		return dao.loadUnknownFace(fileName);
-	}
 }

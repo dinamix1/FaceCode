@@ -2,20 +2,26 @@ package data;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+
+import javax.imageio.ImageIO;
+
+import exception.FaceLoadException;
 
 public class Face implements Serializable{
 	
 	private static final long serialVersionUID = 3594111941132367353L;
 	private String faceName;
-	private BufferedImage originalFace;
-	private int [][] eigenFace;
+	transient private BufferedImage originalFace = null;
 	private int [] faceDifference;
 	private double [] weightVector;
 	
-	public Face(String faceName, BufferedImage originalFace){
+	public Face(String faceName){
 		this.faceName = faceName;
-		this.originalFace = originalFace;
 	}
 	
 	public void setWeightVector(double [] weights){
@@ -48,11 +54,28 @@ public class Face implements Serializable{
 	}
 	
 	public BufferedImage getOriginalFace(){
-		return originalFace;
+		//Lazily load the file
+		if(originalFace != null){
+			return originalFace;
+		}
+		else{
+			try {
+				originalFace = ImageIO.read(new File(faceName));
+				if(originalFace == null){
+					System.out.println("File: " + faceName + " returned null image");
+				}
+			} catch (IOException e) {
+				throw new FaceLoadException(e);
+			}
+			
+			return originalFace;
+		}
+		
+		
 	}
 	
 	public int [] getOriginalFaceVector(){
-		int[] originalFaceVector = new int[originalFace.getWidth() * originalFace.getHeight()];
+		int[] originalFaceVector = new int[getOriginalFace().getWidth() * getOriginalFace().getHeight()];
 		
 		//Used to keep track of where we are in 1D face vector array
 		int index = 0;
@@ -89,6 +112,5 @@ public class Face implements Serializable{
 		
 		double result = Math.sqrt(total);
 		return result;
-		
 	}
 }
