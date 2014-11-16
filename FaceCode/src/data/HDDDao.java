@@ -26,4 +26,8 @@ public class HDDDao {
 		return faceList;
 		
 	}
+	
+	public Face loadUnknownFace(String fileName){
+		return null;
+	}
 }

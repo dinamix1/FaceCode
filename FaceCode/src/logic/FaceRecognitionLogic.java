@@ -5,6 +5,8 @@ import data.Face;
 
 public class FaceRecognitionLogic {
 	
+	private PCALogic pcaLogic;
+	private FaceDataLogic dataLogic;
 	private static final int DISTANCE_THRESHOLD = 10;
 	
 	public boolean isFaceInList(Face faceToFind, ArrayList<Face> faceList){
@@ -27,6 +29,20 @@ public class FaceRecognitionLogic {
 		else{
 			return false;
 		}
+	}
+	
+	public String getFaceMatch(String inputFilename){
+		ArrayList<Face> faceList = dataLogic.loadFaceDb();
+		Face faceToMatch = dataLogic.loadUnknownFace(inputFilename);
+		int [] averageFaceVector = pcaLogic.computeAverageFaceVector(faceList);
+		int [] originalFaceVector = faceToMatch.getOriginalFaceVector();
+		int [] differenceVector = pcaLogic.subtractVectors(originalFaceVector, averageFaceVector);
+		faceToMatch.setFaceDifference(differenceVector);
+		
+		pcaLogic.runPCA(faceList, faceToMatch);
+		
+		
+		return null;
 	}
 	
 }

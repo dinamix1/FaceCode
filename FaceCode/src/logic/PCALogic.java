@@ -2,6 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 
+import utils.LinearAlgebraUtils;
 import data.Face;
 import Jama.Matrix;
 import Jama.EigenvalueDecomposition;
@@ -72,5 +73,13 @@ public class PCALogic {
 		Matrix eigenFacesTranspose = eigenFaces.transpose();
 		Matrix weightMatrix = eigenFacesTranspose.times(aMatrix);
 	    return weightMatrix;
+	}
+	
+	public void runPCA(ArrayList<Face> faceList, Face faceToMatch){
+		Matrix diffMatrix = LinearAlgebraUtils.getFaceDifferencesAsMatrix(faceList);
+		Matrix covariance = computeCovariance(diffMatrix);
+		Matrix eigenvectors = computeEigenVectors(covariance);
+		Matrix eigenfaces = computeEigenFaces(diffMatrix,eigenvectors);
+		Matrix weightsMatrix = weights(eigenfaces,diffMatrix);
 	}
 }
