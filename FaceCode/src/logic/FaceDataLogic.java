@@ -16,6 +16,7 @@ public class FaceDataLogic {
 	}
 	
 	public void addFace(Face face) throws IOException, ClassNotFoundException{
+		//Dont go to the HDD every time, fix
 		System.out.println("Adding face");
 		ArrayList<Face> faceList = null;
 		if(dao.doesDBFileExist()){
@@ -38,6 +39,11 @@ public class FaceDataLogic {
 		} catch (IOException e) {
 			throw new FaceLoadException(e);
 		}
+	}
+	
+	public boolean doesDbExist(){
+		return dao.doesDBFileExist();
+		
 	}
 	
 }

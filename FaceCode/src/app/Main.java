@@ -1,6 +1,8 @@
 package app;
 
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import utils.ImageUtils;
 
@@ -13,6 +15,7 @@ import logic.FaceRecognitionLogic;
 
 public class Main {
 	
+	private static final String DEFAULT_DIRECTORY = "C:\\Users\\Davide\\Documents\\codejam\\training dataset";
 	private static FaceRecognitionLogic logic;
 	private static FaceDataLogic dataLogic;
 	
@@ -21,11 +24,8 @@ public class Main {
 		
 		logic = new FaceRecognitionLogic();
 		dataLogic = new FaceDataLogic();
-		
-		if(args[0].equals("load")){
-			load(args[1]);
-			System.exit(0);
-		}
+
+		load(DEFAULT_DIRECTORY);
 		
 		if(args.length != 1){
 			System.out.println("Usage: facerecognition [filename]");
@@ -36,13 +36,15 @@ public class Main {
 		
 		logic = new FaceRecognitionLogic();
 		String faceMatch = logic.getFaceMatch(fileName);
-		
-		if(faceMatch == null){
-			System.out.println("No match found");
+		Pattern pattern = Pattern.compile("[0-9]*\\_[0-9]*\\_");
+		Matcher m = pattern.matcher(fileName);
+		String token = "";
+		if(m.find()){
+			token = m.group();
 		}
-		else{
-			System.out.println("Match found: " + faceMatch);
-		}
+		String [] tokens = token.split("\\_");
+		int personNumber = Integer.parseInt(tokens[0]);
+		System.out.println("Best Match found: " + personNumber);
 		
 		long endTime = System.currentTimeMillis();
 		
@@ -53,6 +55,11 @@ public class Main {
 	}
 
 	private static void load(String directory){
+		//SHort circuit if we've already loaded files
+		if(dataLogic.doesDbExist()){
+			return;
+		}
+		
 		File dbDirectory = new File(directory);
 		try{
 			for(File picture : dbDirectory.listFiles()){
