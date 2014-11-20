@@ -15,11 +15,11 @@ public class TestCropImage {
 		File input = new File("Pictures//training_dataset//1_10_.gif");
 		File[] inputfiles = input.listFiles();
 
-		//for (File file : inputfiles) {
-			//BufferedImage newimage = ImageUtils.cropImage(input);
+		for (File file : inputfiles) {
+			BufferedImage newimage = ImageUtils.cropImage(input);
 
-			//ImageIO.write(newimage, "png", new File(
-			//		"Pictures//training_dataset_out//outofbounds.png"));
-		//}
+			ImageIO.write(newimage, "png", new File(
+					"Pictures//training_dataset_out//outofbounds.png"));
+		}
 	}
 }

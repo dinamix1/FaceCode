@@ -34,7 +34,7 @@ public class ImageUtils {
 		return ImageIO.read(file);
 	}
 
-/*	//This will convert .gif to .png
+	//This will convert .gif to .png
 	//then it will crop and output image file
 	public static BufferedImage cropImage(File input) throws IOException {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
@@ -51,7 +51,8 @@ public class ImageUtils {
 
 		MatOfRect eyeDetections = new MatOfRect();
 		testFaceDetector.detectMultiScale(image, eyeDetections);
-
+		
+		try {
 		if(eyeDetections.toArray().length == 1) {
 			System.out.println(String.format("Detected %s faces", eyeDetections.toArray().length));
 
@@ -84,5 +85,9 @@ public class ImageUtils {
 			}
 		}
 		return reSize(originalimage,250,190);
-	}*/
+		}
+		catch (Exception ex) {
+			return reSize(originalimage,250,190);
+		}
+	}
 }
