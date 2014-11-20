@@ -15,7 +15,7 @@ import logic.FaceRecognitionLogic;
 
 public class Main {
 	
-	private static final String DEFAULT_DIRECTORY = "C:\\Users\\Davide\\Documents\\codejam\\training dataset";
+	private static final String DEFAULT_DIRECTORY = "/CodeJam/trainingDataset";
 	private static FaceRecognitionLogic logic;
 	private static FaceDataLogic dataLogic;
 	
@@ -44,13 +44,12 @@ public class Main {
 		}
 		String [] tokens = token.split("\\_");
 		int personNumber = Integer.parseInt(tokens[0]);
-		System.out.println("Best Match found: " + personNumber);
+		System.out.println(personNumber);
 		
 		long endTime = System.currentTimeMillis();
 		
 		long totalTime = endTime - startTime;
 		totalTime = totalTime/1000;
-		System.out.println("This took: " + totalTime + " seconds to run");
 
 	}
 

@@ -61,10 +61,8 @@ public class Face implements Serializable{
 		}
 		else{
 			try {
-				System.out.println("Loading image: " + faceName);
 				originalFace = ImageIO.read(new File(faceName));
 				if(originalFace == null){
-					System.out.println("File: " + faceName + " returned null image");
 				}
 			} catch (IOException e) {
 				throw new FaceLoadException(e);

@@ -8,7 +8,6 @@ import data.Face;
 public class LinearAlgebraUtils {
 	
 	public static Matrix getFaceDifferencesAsMatrix(ArrayList<Face> faceList){
-		System.out.println("Computing differences matrix");
 		int faceDifferenceVectorSize = faceList.get(0).getFaceDifference().length; 
 		
 		//Each face difference vector is a column vector in the matrix

@@ -23,7 +23,6 @@ public class FaceRecognitionLogic {
 	}
 	
 	public Face getBestMatch(Face faceToFind, ArrayList<Face> faceList){
-		System.out.println("Finding match distnces for: " + faceToFind.getFaceName());
 		Map<String,Double> distanceMap = new HashMap<String,Double>();
 		
 		double bestDistance = -1;
@@ -35,7 +34,6 @@ public class FaceRecognitionLogic {
 				bestMatch = face;
 				bestDistance = distance;
 			}
-			System.out.println("Distance from " + face.getFaceName() + ": " + distance);
 			distanceMap.put(face.getFaceName(),distance);
 		}
 		
@@ -111,7 +109,6 @@ public class FaceRecognitionLogic {
 	}
 	
 	public String getFaceMatch(String inputFilename){
-		System.out.println("Computing best match");
 		ArrayList<Face> faceList = dataLogic.loadFaceDb();
 		Face faceToMatch = new Face(inputFilename);
 		int [] averageFaceVector = pcaLogic.computeAverageFaceVector(faceList);
